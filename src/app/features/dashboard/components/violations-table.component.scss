@@ -21,11 +21,11 @@
 .filter-bar__icon {
   position: absolute;
   left: 0.75rem;
-  top: 50%;
+  top: 46%;
   transform: translateY(-50%);
   color: var(--zinc-400);
   pointer-events: none;
-}
+} 
 
 .table__row--clickable {
   cursor: pointer;

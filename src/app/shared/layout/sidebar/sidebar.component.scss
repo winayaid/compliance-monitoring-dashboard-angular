@@ -50,21 +50,22 @@
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 0.75rem;
+  border-radius: 0.85rem;
   background: var(--indigo-500);
   color: white;
 }
 
 .sidebar__brand-title {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .sidebar__brand-subtitle {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 12px;
   color: var(--zinc-500);
+  margin-top: 4px;
 }
 
 .sidebar__toggle {
@@ -78,15 +79,22 @@
 .sidebar__search {
   position: relative;
 }
-
+ 
 .sidebar__search-icon {
-  position: absolute;
+  position: absolute; 
   left: 0.75rem;
-  top: 50%;
+  top: 46%;
   transform: translateY(-50%);
   color: var(--zinc-400);
   pointer-events: none;
+  z-index: 1;
 }
+
+.sidebar__search-input {
+  padding-left: 2.5rem; // ⬅️ ruang untuk icon
+}
+
+
 
 .sidebar__section {
   display: flex;
@@ -122,7 +130,6 @@
 .sidebar__link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.5rem;
   border-radius: 0.75rem;
   padding: 0.5rem 0.75rem;

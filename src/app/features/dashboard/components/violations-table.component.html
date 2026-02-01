@@ -8,7 +8,7 @@
   </div>
   <div class="filter-bar">
     <div class="filter-bar__search">
-      <app-icon name="search" [size]="16" className="filter-bar__icon"></app-icon>
+      <app-icon name="search" [size]="16" class="filter-bar__icon"></app-icon>
       <input appInput [hasIcon]="true" placeholder="Search violations" />
     </div>
     <button appButton variant="outline" size="sm" class="table-card__button">Risk</button>
@@ -28,16 +28,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="let item of violations$ | async"
-          class="table__row--clickable"
-          (click)="goToDetail(item.id)"
-          tabindex="0"
-          (keydown.enter)="goToDetail(item.id)"
-          (keydown.space)="$event.preventDefault(); goToDetail(item.id)"
-          role="link"
-          [attr.aria-label]="'View details for ' + item.violation"
-        >
+        <tr *ngFor="let item of violations$ | async" class="table__row--clickable" (click)="goToDetail(item.id)"
+          tabindex="0" (keydown.enter)="goToDetail(item.id)"
+          (keydown.space)="$event.preventDefault(); goToDetail(item.id)" role="link"
+          [attr.aria-label]="'View details for ' + item.violation">
           <td class="table__cell--strong">{{ item.violation }}</td>
           <td>{{ item.branch }}</td>
           <td>
@@ -48,13 +42,7 @@
           </td>
           <td class="table__cell--muted">{{ item.date }} • {{ item.time }}</td>
           <td>
-            <button
-              appButton
-              variant="ghost"
-              size="icon"
-              aria-label="More actions"
-              (click)="$event.stopPropagation()"
-            >
+            <button appButton variant="ghost" size="icon" aria-label="More actions" (click)="$event.stopPropagation()">
               <app-icon name="more-horizontal" [size]="16"></app-icon>
             </button>
           </td>
