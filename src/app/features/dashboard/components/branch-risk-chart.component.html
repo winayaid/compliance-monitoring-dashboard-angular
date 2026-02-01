@@ -9,56 +9,14 @@
       Q1 2026
     </button>
   </div>
-  <div class="chart-card__body">
-    <svg
-      *ngIf="chart$ | async as chart"
-      class="chart-card__svg"
-      [attr.viewBox]="'0 0 ' + viewBoxWidth + ' ' + viewBoxHeight"
-      preserveAspectRatio="none"
-    >
-      <g class="chart-grid">
-        <line
-          *ngFor="let y of chart.grid"
-          [attr.x1]="padding.left"
-          [attr.x2]="viewBoxWidth - padding.right"
-          [attr.y1]="y"
-          [attr.y2]="y"
-        ></line>
-      </g>
-      <g class="bar-series">
-        <rect
-          *ngFor="let bar of chart.bars"
-          [attr.x]="bar.x"
-          [attr.y]="bar.y"
-          [attr.width]="bar.width"
-          [attr.height]="bar.height"
-          rx="10"
-          ry="10"
-        >
-          <title>{{ bar.label }} Risk score: {{ bar.value }}</title>
-        </rect>
-      </g>
-      <polyline class="line-series" [attr.points]="chart.polyline"></polyline>
-      <g class="line-points">
-        <circle
-          *ngFor="let point of chart.line"
-          [attr.cx]="point.x"
-          [attr.cy]="point.y"
-          r="4"
-        >
-          <title>{{ point.label }} Open violations: {{ point.value }}</title>
-        </circle>
-      </g>
-      <g class="chart-x-labels">
-        <text
-          *ngFor="let item of chart.xLabels"
-          [attr.x]="item.x"
-          [attr.y]="viewBoxHeight - 8"
-          text-anchor="middle"
-        >
-          {{ item.label }}
-        </text>
-      </g>
-    </svg>
+  <div class="chart-card__body" *ngIf="isBrowser">
+    <ng-container *ngIf="data$ | async as data">
+      <canvas
+        baseChart
+        [type]="'bar'"
+        [data]="data"
+        [options]="options"
+      ></canvas>
+    </ng-container>
   </div>
 </section>

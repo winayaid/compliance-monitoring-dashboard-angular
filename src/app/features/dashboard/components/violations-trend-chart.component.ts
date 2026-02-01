@@ -1,71 +1,70 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { map } from 'rxjs/operators';
+import { BaseChartDirective } from 'ng2-charts';
+import type { ChartData, ChartOptions } from 'chart.js';
+import { isPlatformBrowser } from '@angular/common';
 
 import { DashboardDataService } from '../../../core/services/dashboard-data.service';
 import { ButtonDirective } from '../../../shared/ui/button/button.directive';
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
-import type { ViolationsTrendDatum } from '../../../core/models/dashboard';
-
-type ChartPoint = {
-  x: number;
-  y: number;
-  label: string;
-  value: number;
-};
-
-type TrendChartView = {
-  points: ChartPoint[];
-  polyline: string;
-  xLabels: { x: number; label: string }[];
-  yLabels: { y: number; label: string }[];
-  grid: number[];
-};
 
 @Component({
   selector: 'app-violations-trend-chart',
   standalone: true,
-  imports: [CommonModule, ButtonDirective, IconComponent],
+  imports: [CommonModule, ButtonDirective, IconComponent, BaseChartDirective],
   templateUrl: './violations-trend-chart.component.html',
   styleUrl: './violations-trend-chart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViolationsTrendChartComponent {
   private readonly dataService = inject(DashboardDataService);
+  private readonly platformId = inject(PLATFORM_ID);
+  readonly isBrowser = isPlatformBrowser(this.platformId);
 
-  readonly viewBoxWidth = 600;
-  readonly viewBoxHeight = 240;
-  readonly padding = { top: 16, right: 20, bottom: 32, left: 42 };
+  readonly data$ = this.dataService.getDashboardData().pipe(
+    map((data) => ({
+      labels: data.violationsTrend.map((item) => item.dateRange),
+      datasets: [
+        {
+          data: data.violationsTrend.map((item) => item.value),
+          label: 'Violations',
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37, 99, 235, 0.12)',
+          tension: 0.4,
+          pointRadius: 4,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#2563eb',
+          borderWidth: 3,
+          fill: false,
+        },
+      ],
+    }) satisfies ChartData<'line'>),
+  );
 
-  readonly chart$ = this.dataService
-    .getDashboardData()
-    .pipe(map((data) => this.buildChart(data.violationsTrend)));
-
-  private buildChart(data: ViolationsTrendDatum[]): TrendChartView {
-    const maxValue = Math.max(...data.map((item) => item.value), 0);
-    const width = this.viewBoxWidth - this.padding.left - this.padding.right;
-    const height = this.viewBoxHeight - this.padding.top - this.padding.bottom;
-    const stepX = data.length > 1 ? width / (data.length - 1) : width;
-
-    const points = data.map((item, index) => {
-      const x = this.padding.left + index * stepX;
-      const y =
-        this.padding.top +
-        height -
-        (item.value / Math.max(maxValue, 1)) * height;
-      return { x, y, label: item.dateRange, value: item.value };
-    });
-
-    const polyline = points.map((point) => `${point.x},${point.y}`).join(' ');
-
-    const xLabels = points.map((point) => ({ x: point.x, label: point.label }));
-    const yLabels = [0.25, 0.5, 0.75, 1].map((step) => ({
-      y: this.padding.top + height - height * step,
-      label: Math.round(maxValue * step).toString(),
-    }));
-
-    const grid = yLabels.map((item) => item.y);
-
-    return { points, polyline, xLabels, yLabels, grid };
-  }
+  readonly options: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#ffffff',
+        titleColor: '#3f3f46',
+        bodyColor: '#18181b',
+        borderColor: '#e4e4e7',
+        borderWidth: 1,
+        displayColors: false,
+      },
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { color: '#71717a', font: { size: 11 } },
+      },
+      y: {
+        grid: { color: 'rgba(228, 228, 231, 0.8)' },
+        ticks: { color: '#71717a', font: { size: 12 } },
+      },
+    },
+  };
 }

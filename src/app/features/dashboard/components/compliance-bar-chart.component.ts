@@ -1,88 +1,68 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BaseChartDirective } from 'ng2-charts';
+import type { ChartData, ChartOptions } from 'chart.js';
 import { map } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 import { DashboardDataService } from '../../../core/services/dashboard-data.service';
 import { ButtonDirective } from '../../../shared/ui/button/button.directive';
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
-import type { ComplianceReportDatum } from '../../../core/models/reports';
-
-type Bar = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  label: string;
-  value: number;
-};
-
-type LinePoint = {
-  x: number;
-  y: number;
-  label: string;
-  value: number;
-};
-
-type ComplianceChartView = {
-  bars: Bar[];
-  line: LinePoint[];
-  polyline: string;
-  xLabels: { x: number; label: string }[];
-  grid: number[];
-};
 
 @Component({
   selector: 'app-compliance-bar-chart',
   standalone: true,
-  imports: [CommonModule, ButtonDirective, IconComponent],
+  imports: [CommonModule, ButtonDirective, IconComponent, BaseChartDirective],
   templateUrl: './compliance-bar-chart.component.html',
   styleUrl: './compliance-bar-chart.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComplianceBarChartComponent {
   private readonly dataService = inject(DashboardDataService);
+  private readonly platformId = inject(PLATFORM_ID);
+  readonly isBrowser = isPlatformBrowser(this.platformId);
+  readonly data$ = this.dataService.getComplianceReportData().pipe(
+    map((data) => {
+      const datasets = [
+        {
+          label: 'Compliance rate',
+          data: data.map((item) => item.complianceRate),
+          backgroundColor: '#0ea5e9',
+          borderRadius: 10,
+        },
+      ];
 
-  readonly viewBoxWidth = 620;
-  readonly viewBoxHeight = 260;
-  readonly padding = { top: 16, right: 20, bottom: 32, left: 40 };
-
-  readonly chart$ = this.dataService
-    .getComplianceReportData()
-    .pipe(map((data) => this.buildChart(data)));
-
-  private buildChart(data: ComplianceReportDatum[]): ComplianceChartView {
-    const width = this.viewBoxWidth - this.padding.left - this.padding.right;
-    const height = this.viewBoxHeight - this.padding.top - this.padding.bottom;
-    const barSlot = width / data.length;
-    const barWidth = barSlot * 0.55;
-    const barOffset = (barSlot - barWidth) / 2;
-
-    const bars = data.map((item, index) => {
-      const barHeight = (item.complianceRate / 100) * height;
-      const x = this.padding.left + index * barSlot + barOffset;
-      const y = this.padding.top + height - barHeight;
       return {
-        x,
-        y,
-        width: barWidth,
-        height: barHeight,
-        label: item.month,
-        value: item.complianceRate,
-      };
-    });
+        labels: data.map((item) => item.month),
+        datasets,
+      } satisfies ChartData<'bar'>;
+    }),
+  );
 
-    const line = data.map((item, index) => {
-      const x = this.padding.left + index * barSlot + barSlot / 2;
-      const y = this.padding.top + height - (item.targetRate / 100) * height;
-      return { x, y, label: item.month, value: item.targetRate };
-    });
-
-    const polyline = line.map((point) => `${point.x},${point.y}`).join(' ');
-    const xLabels = line.map((point) => ({ x: point.x, label: point.label }));
-    const grid = [0.25, 0.5, 0.75, 1].map(
-      (step) => this.padding.top + height - height * step,
-    );
-
-    return { bars, line, polyline, xLabels, grid };
-  }
+  readonly options: ChartOptions<'bar'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#ffffff',
+        titleColor: '#3f3f46',
+        bodyColor: '#18181b',
+        borderColor: '#e4e4e7',
+        borderWidth: 1,
+      },
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { color: '#71717a', font: { size: 11 } },
+      },
+      y: {
+        min: 0,
+        max: 100,
+        grid: { color: 'rgba(228, 228, 231, 0.8)' },
+        ticks: { color: '#71717a', font: { size: 12 } },
+      },
+    },
+  };
 }

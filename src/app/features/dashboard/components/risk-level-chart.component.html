@@ -3,33 +3,14 @@
     <p class="card__title">Risk level mix</p>
     <p class="card__subtitle">Distribution of current violations</p>
   </div>
-  <div class="risk-chart" *ngIf="chart$ | async as chart">
-    <svg
-      class="risk-chart__svg"
-      [attr.viewBox]="'0 0 ' + viewBoxSize + ' ' + viewBoxSize"
-    >
-      <g>
-        <path
-          *ngFor="let segment of chart.segments"
-          class="risk-chart__segment"
-          [ngClass]="levelClass(segment.label)"
-          [attr.d]="segment.path"
-        >
-          <title>{{ segment.label }}: {{ segment.value }}</title>
-        </path>
-      </g>
-    </svg>
-    <div class="risk-chart__legend">
-      <div
-        class="risk-chart__legend-item"
-        *ngFor="let segment of chart.segments"
-      >
-        <span
-          class="risk-chart__legend-dot"
-          [ngClass]="levelClass(segment.label)"
-        ></span>
-        <span class="risk-chart__legend-label">{{ segment.label }}</span>
-      </div>
-    </div>
+  <div class="risk-chart" *ngIf="isBrowser">
+    <ng-container *ngIf="data$ | async as data">
+      <canvas
+        baseChart
+        [type]="'doughnut'"
+        [data]="data"
+        [options]="options"
+      ></canvas>
+    </ng-container>
   </div>
 </section>

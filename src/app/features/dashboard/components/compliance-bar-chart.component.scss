@@ -1,16 +1,4 @@
-@use './branch-risk-chart.component' as *;
-
-.bar-series rect {
-  fill: var(--cyan-500);
-}
-
-.line-series {
-  stroke: var(--orange-500);
-}
-
-.line-points circle {
-  fill: var(--orange-500);
-}
+@use './violations-trend-chart.component' as *;
 
 .compliance-summary {
   margin-top: 1rem;

@@ -1,102 +1,88 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BaseChartDirective } from 'ng2-charts';
+import type { ChartData, ChartOptions } from 'chart.js';
 import { map } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 import { DashboardDataService } from '../../../core/services/dashboard-data.service';
 import { ButtonDirective } from '../../../shared/ui/button/button.directive';
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
-import type { ChartDatum } from '../../../core/models/dashboard';
-
-type StackSegment = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  color: string;
-  value: number;
-};
-
-type StackBar = {
-  label: string;
-  segments: StackSegment[];
-  x: number;
-};
-
-type ChartView = {
-  bars: StackBar[];
-  xLabels: { x: number; label: string }[];
-  grid: number[];
-};
 
 @Component({
   selector: 'app-patients-chart-card',
   standalone: true,
-  imports: [CommonModule, ButtonDirective, IconComponent],
+  imports: [CommonModule, ButtonDirective, IconComponent, BaseChartDirective],
   templateUrl: './patients-chart-card.component.html',
   styleUrl: './patients-chart-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PatientsChartCardComponent {
   private readonly dataService = inject(DashboardDataService);
+  private readonly platformId = inject(PLATFORM_ID);
+  readonly isBrowser = isPlatformBrowser(this.platformId);
 
-  readonly viewBoxWidth = 620;
-  readonly viewBoxHeight = 260;
-  readonly padding = { top: 16, right: 20, bottom: 32, left: 40 };
+  readonly data$ = this.dataService.getDashboardData().pipe(
+    map((data) => ({
+      labels: data.chart.map((item) => item.month),
+      datasets: [
+        {
+          label: 'Self care',
+          data: data.chart.map((item) => item.selfCare),
+          backgroundColor: '#c7d2fe',
+          borderRadius: 8,
+          stack: 'care',
+        },
+        {
+          label: 'Intermediate care',
+          data: data.chart.map((item) => item.intermediateCare),
+          backgroundColor: '#818cf8',
+          borderRadius: 8,
+          stack: 'care',
+        },
+        {
+          label: 'Total care',
+          data: data.chart.map((item) => item.totalCare),
+          backgroundColor: '#312e81',
+          borderRadius: 8,
+          stack: 'care',
+        },
+      ],
+    }) satisfies ChartData<'bar'>),
+  );
 
-  readonly chart$ = this.dataService
-    .getDashboardData()
-    .pipe(map((data) => this.buildChart(data.chart)));
-
-  private buildChart(data: ChartDatum[]): ChartView {
-    const width = this.viewBoxWidth - this.padding.left - this.padding.right;
-    const height = this.viewBoxHeight - this.padding.top - this.padding.bottom;
-    const barSlot = width / data.length;
-    const barWidth = barSlot * 0.55;
-    const barOffset = (barSlot - barWidth) / 2;
-
-    const maxValue = Math.max(
-      ...data.map((item) => item.selfCare + item.intermediateCare + item.totalCare),
-      0,
-    );
-
-    const colors = {
-      selfCare: '#c7d2fe',
-      intermediateCare: '#818cf8',
-      totalCare: '#312e81',
-    };
-
-    const bars = data.map((item, index) => {
-      const x = this.padding.left + index * barSlot + barOffset;
-      const total = item.selfCare + item.intermediateCare + item.totalCare;
-      let y = this.padding.top + height;
-      const segments: StackSegment[] = [];
-
-      (['selfCare', 'intermediateCare', 'totalCare'] as const).forEach((key) => {
-        const value = item[key];
-        const segmentHeight = maxValue === 0 ? 0 : (value / maxValue) * height;
-        y -= segmentHeight;
-        segments.push({
-          x,
-          y,
-          width: barWidth,
-          height: segmentHeight,
-          color: colors[key],
-          value,
-        });
-      });
-
-      return { label: item.month, segments, x };
-    });
-
-    const xLabels = data.map((item, index) => ({
-      x: this.padding.left + index * barSlot + barSlot / 2,
-      label: item.month,
-    }));
-
-    const grid = [0.25, 0.5, 0.75, 1].map(
-      (step) => this.padding.top + height - height * step,
-    );
-
-    return { bars, xLabels, grid };
-  }
+  readonly options: ChartOptions<'bar'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          pointStyle: 'circle',
+          color: '#71717a',
+          font: { size: 12 },
+        },
+      },
+      tooltip: {
+        backgroundColor: '#ffffff',
+        titleColor: '#3f3f46',
+        bodyColor: '#18181b',
+        borderColor: '#e4e4e7',
+        borderWidth: 1,
+      },
+    },
+    scales: {
+      x: {
+        stacked: true,
+        grid: { display: false },
+        ticks: { color: '#71717a', font: { size: 12 } },
+      },
+      y: {
+        stacked: true,
+        grid: { color: 'rgba(228, 228, 231, 0.8)' },
+        ticks: { color: '#71717a', font: { size: 12 } },
+      },
+    },
+  };
 }
