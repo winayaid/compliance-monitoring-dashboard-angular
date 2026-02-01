@@ -1,0 +1,37 @@
+.quick-add {
+  border-radius: 1.25rem;
+  border: 1px solid rgba(228, 228, 231, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.quick-add__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quick-add__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: var(--indigo-50);
+  color: var(--indigo-600);
+}
+
+.quick-add__form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quick-add__error {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--rose-500);
+}

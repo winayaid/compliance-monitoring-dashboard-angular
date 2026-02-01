@@ -1,0 +1,38 @@
+@use './violations-table.component' as *;
+
+.table__cell--small {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+}
+
+.progress-cell {
+  min-width: 7rem;
+}
+
+.progress-cell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+}
+
+.progress-cell__value {
+  font-weight: 600;
+  color: var(--zinc-700);
+}
+
+.badge.status-stable {
+  background: var(--emerald-100);
+  color: var(--emerald-600);
+}
+
+.badge.status-watch {
+  background: var(--amber-100);
+  color: var(--amber-600);
+}
+
+.badge.status-critical {
+  background: var(--rose-100);
+  color: var(--rose-600);
+}

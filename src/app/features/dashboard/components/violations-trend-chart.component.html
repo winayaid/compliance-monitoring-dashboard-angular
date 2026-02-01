@@ -1,0 +1,61 @@
+<section class="chart-card">
+  <div class="chart-card__header">
+    <div>
+      <p class="card__title">Violations trend</p>
+      <p class="card__subtitle">Weekly total across branches</p>
+    </div>
+    <button appButton variant="outline" size="sm" class="chart-card__button">
+      <app-icon name="calendar" [size]="16"></app-icon>
+      Range
+    </button>
+  </div>
+  <div class="chart-card__body">
+    <svg
+      *ngIf="chart$ | async as chart"
+      class="chart-card__svg"
+      [attr.viewBox]="'0 0 ' + viewBoxWidth + ' ' + viewBoxHeight"
+      preserveAspectRatio="none"
+    >
+      <g class="chart-grid">
+        <line
+          *ngFor="let y of chart.grid"
+          [attr.x1]="padding.left"
+          [attr.x2]="viewBoxWidth - padding.right"
+          [attr.y1]="y"
+          [attr.y2]="y"
+        ></line>
+      </g>
+      <polyline class="chart-line" [attr.points]="chart.polyline"></polyline>
+      <g class="chart-points">
+        <circle
+          *ngFor="let point of chart.points"
+          [attr.cx]="point.x"
+          [attr.cy]="point.y"
+          r="4"
+        >
+          <title>{{ point.label }}: {{ point.value }}</title>
+        </circle>
+      </g>
+      <g class="chart-x-labels">
+        <text
+          *ngFor="let item of chart.xLabels"
+          [attr.x]="item.x"
+          [attr.y]="viewBoxHeight - 8"
+          text-anchor="middle"
+        >
+          {{ item.label }}
+        </text>
+      </g>
+      <g class="chart-y-labels">
+        <text
+          *ngFor="let item of chart.yLabels"
+          [attr.x]="padding.left - 8"
+          [attr.y]="item.y + 4"
+          text-anchor="end"
+        >
+          {{ item.label }}
+        </text>
+      </g>
+    </svg>
+  </div>
+</section>

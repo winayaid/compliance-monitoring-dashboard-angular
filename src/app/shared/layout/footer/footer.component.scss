@@ -1,0 +1,16 @@
+.footer {
+  border-top: 1px solid var(--zinc-200);
+  background: white;
+}
+
+.footer__content {
+  margin: 0 auto;
+  max-width: 70rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.5rem;
+  padding: 0 1.5rem;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+}

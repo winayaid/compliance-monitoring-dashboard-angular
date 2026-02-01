@@ -1,0 +1,28 @@
+<form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="login-form__field">
+    <input appInput type="email" placeholder="Email" formControlName="email" />
+    <p *ngIf="form.controls.email.touched && form.controls.email.invalid" class="login-form__error">
+      {{ form.controls.email.errors?.['email'] ? 'Enter a valid email address' : 'Email is required' }}
+    </p>
+  </div>
+  <div class="login-form__field">
+    <input appInput type="password" placeholder="Password" formControlName="password" />
+    <p *ngIf="form.controls.password.touched && form.controls.password.invalid" class="login-form__error">
+      {{ form.controls.password.errors?.['minlength'] ? 'Password must be at least 6 characters' : 'Password is required' }}
+    </p>
+  </div>
+  <button
+    appButton
+    class="btn--indigo"
+    type="submit"
+    [disabled]="submitting"
+  >
+    {{ submitting ? 'Signing in...' : 'Sign in' }}
+  </button>
+  <p *ngIf="submitError" class="login-form__error">
+    {{ submitError }}
+  </p>
+  <p *ngIf="submitSuccess && !submitError" class="login-form__success">
+    Signed in successfully.
+  </p>
+</form>

@@ -1,0 +1,35 @@
+<section class="quick-add">
+  <div class="quick-add__header">
+    <span class="quick-add__icon">
+      <app-icon name="user-plus" [size]="16"></app-icon>
+    </span>
+    <div>
+      <p class="card__title">Quick add doctor</p>
+      <p class="card__subtitle">Create a profile for your next specialist.</p>
+    </div>
+  </div>
+
+  <form class="quick-add__form" [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <input appInput placeholder="Doctor name" formControlName="name" />
+      <p *ngIf="form.controls.name.touched && form.controls.name.invalid" class="quick-add__error">
+        Name must be at least 2 characters
+      </p>
+    </div>
+    <div>
+      <input appInput placeholder="Specialty" formControlName="specialty" />
+      <p *ngIf="form.controls.specialty.touched && form.controls.specialty.invalid" class="quick-add__error">
+        Specialty is required
+      </p>
+    </div>
+    <div>
+      <input appInput placeholder="Email address" type="email" formControlName="email" />
+      <p *ngIf="form.controls.email.touched && form.controls.email.invalid" class="quick-add__error">
+        Enter a valid email
+      </p>
+    </div>
+    <button appButton type="submit" class="btn--indigo" [disabled]="submitting">
+      Create profile
+    </button>
+  </form>
+</section>

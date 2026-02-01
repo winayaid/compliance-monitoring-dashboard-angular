@@ -1,0 +1,90 @@
+<aside class="sidebar" [class.sidebar--collapsed]="collapsed()">
+  <div class="sidebar__content">
+    <div class="sidebar__header">
+      <div class="sidebar__brand">
+        <span class="sidebar__brand-icon">
+          <app-icon name="shield-check" [size]="20"></app-icon>
+        </span>
+        <div class="sidebar__brand-text" *ngIf="!collapsed()">
+          <p class="sidebar__brand-title">RegulaSight</p>
+          <p class="sidebar__brand-subtitle">Compliance Monitoring</p>
+        </div>
+      </div>
+      <button
+        appButton
+        variant="ghost"
+        size="icon-sm"
+        class="sidebar__toggle"
+        type="button"
+        (click)="toggle()"
+        [attr.aria-label]="collapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
+      >
+        <app-icon
+          [name]="collapsed() ? 'panel-left-open' : 'panel-left-close'"
+          [size]="18"
+        ></app-icon>
+      </button>
+    </div>
+
+    <div class="sidebar__search" *ngIf="!collapsed()">
+      <app-icon className="sidebar__search-icon" name="search" [size]="16"></app-icon>
+      <input appInput [hasIcon]="true" placeholder="Search" />
+    </div>
+
+    <div class="sidebar__section">
+      <p class="sidebar__section-title" [class.sidebar__section-title--center]="collapsed()">
+        Main menu
+      </p>
+      <nav class="sidebar__nav" [class.sidebar__nav--collapsed]="collapsed()">
+        <a
+          *ngFor="let item of navigation.dashboard.main"
+          [routerLink]="item.href"
+          routerLinkActive="sidebar__link--active"
+          class="sidebar__link"
+          [class.sidebar__link--center]="collapsed()"
+        >
+          <span class="sidebar__link-content">
+            <app-icon *ngIf="item.icon as icon" [name]="icon" [size]="16"></app-icon>
+            <span *ngIf="!collapsed()">{{ item.label }}</span>
+          </span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar__section">
+      <p class="sidebar__section-title" [class.sidebar__section-title--center]="collapsed()">
+        Other
+      </p>
+      <nav class="sidebar__nav" [class.sidebar__nav--collapsed]="collapsed()">
+        <a
+          *ngFor="let item of navigation.dashboard.other"
+          [routerLink]="item.href"
+          routerLinkActive="sidebar__link--active"
+          class="sidebar__link"
+          [class.sidebar__link--center]="collapsed()"
+        >
+          <app-icon *ngIf="item.icon as icon" [name]="icon" [size]="16"></app-icon>
+          <span *ngIf="!collapsed()">{{ item.label }}</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="sidebar__footer">
+    <div class="sidebar__user" *ngIf="!collapsed()">
+      <p class="sidebar__user-name">Scott Beier</p>
+      <p class="sidebar__user-role">Super Admin</p>
+    </div>
+    <button
+      appButton
+      variant="ghost"
+      size="icon-sm"
+      class="sidebar__logout"
+      type="button"
+      aria-label="Log out"
+      (click)="logout()"
+    >
+      <app-icon name="log-out" [size]="16"></app-icon>
+    </button>
+  </div>
+</aside>

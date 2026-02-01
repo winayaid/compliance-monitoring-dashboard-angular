@@ -1,0 +1,18 @@
+<div class="stats-grid">
+  <div class="stats-card" *ngFor="let stat of stats$ | async">
+    <div class="stats-card__header">
+      <p class="stats-card__label">{{ stat.label }}</p>
+      <button class="stats-card__menu" type="button" aria-label="Card options">
+        <app-icon name="more-vertical" [size]="16"></app-icon>
+      </button>
+    </div>
+    <div class="stats-card__value">
+      <p class="stats-card__number">{{ stat.value | number }}</p>
+      <span class="stats-card__trend" [ngClass]="trendClass(stat.trend)">
+        <app-icon [name]="trendIcon(stat.trend)" [size]="16"></app-icon>
+        {{ stat.change < 0 ? (stat.change * -1) : stat.change }}%
+      </span>
+    </div>
+    <p class="stats-card__caption">since last week</p>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<aside class="status-panel">
+  <p class="card__title">Update status</p>
+  <p class="card__subtitle">Log progress and keep the compliance team aligned.</p>
+
+  <div class="status-panel__current">
+    <p class="status-panel__label">Current status</p>
+    <p class="status-panel__value">{{ currentStatus }}</p>
+    <p class="status-panel__next">Next review scheduled: {{ nextReview }}</p>
+  </div>
+
+  <div class="status-panel__options">
+    <button
+      *ngFor="let status of options"
+      type="button"
+      class="status-panel__option"
+      [class.status-panel__option--active]="isActive(status.value)"
+    >
+      <span class="status-panel__option-icon" [class.status-panel__option-icon--active]="isActive(status.value)">
+        <app-icon [name]="status.icon" [size]="16"></app-icon>
+      </span>
+      <span>
+        <span class="status-panel__option-title">{{ status.label }}</span>
+        <span class="status-panel__option-helper">{{ status.helper }}</span>
+      </span>
+    </button>
+  </div>
+
+  <div class="status-panel__form">
+    <div>
+      <p class="status-panel__label">Update note</p>
+      <textarea
+        appInput
+        class="status-panel__textarea"
+        placeholder="Add a short update for the compliance log..."
+      ></textarea>
+    </div>
+    <div>
+      <p class="status-panel__label">Notify</p>
+      <input
+        appInput
+        placeholder="Add stakeholder email or team name"
+      />
+    </div>
+    <div class="status-panel__actions">
+      <button appButton class="btn--indigo">Save update</button>
+      <button appButton variant="outline" class="status-panel__button">Send reminder</button>
+    </div>
+  </div>
+</aside>

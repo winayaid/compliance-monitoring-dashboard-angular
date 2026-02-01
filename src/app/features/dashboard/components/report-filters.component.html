@@ -1,0 +1,27 @@
+<section class="filter-card">
+  <div class="filter-card__header">
+    <div>
+      <p class="card__title">Report filters</p>
+      <p class="card__subtitle">Focus on branches, audit windows, and compliance priority</p>
+    </div>
+    <button appButton variant="outline" size="sm" class="filter-card__button">
+      <app-icon name="filter" [size]="16"></app-icon>
+      Quick filters
+    </button>
+  </div>
+  <div class="filter-card__filters">
+    <div class="filter-card__search">
+      <app-icon name="search" [size]="16" className="filter-card__icon"></app-icon>
+      <input appInput [hasIcon]="true" placeholder="Search branch or report owner" />
+    </div>
+    <button appButton variant="outline" size="sm" class="filter-card__button">
+      <app-icon name="map-pin" [size]="16"></app-icon>
+      Region
+    </button>
+    <button appButton variant="outline" size="sm" class="filter-card__button">
+      <app-icon name="calendar" [size]="16"></app-icon>
+      Date range
+    </button>
+    <button appButton variant="outline" size="sm" class="filter-card__button">Priority</button>
+  </div>
+</section>

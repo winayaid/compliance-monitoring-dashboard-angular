@@ -1,0 +1,25 @@
+.dashboard-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #e0e7ff 0%, #f8fafc 45%, #ffffff 100%);
+}
+
+.dashboard-shell__content {
+  margin: 0 auto;
+  display: flex;
+  gap: 1.75rem;
+}
+
+.dashboard-shell__main {
+  flex: 1;
+  padding: 0.5rem 1.5rem 2.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .dashboard-shell__content {
+    flex-direction: column;
+  }
+
+  .dashboard-shell__main {
+    padding: 1rem 1.5rem 2.5rem;
+  }
+}

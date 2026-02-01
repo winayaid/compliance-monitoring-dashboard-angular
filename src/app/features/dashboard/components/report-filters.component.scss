@@ -1,0 +1,47 @@
+.filter-card {
+  border-radius: 1.25rem;
+  border: 1px solid rgba(228, 228, 231, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.filter-card__filters {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(228, 228, 231, 0.7);
+  background: rgba(244, 244, 245, 0.7);
+  padding: 0.75rem;
+}
+
+.filter-card__search {
+  position: relative;
+  flex: 1;
+  min-width: 14rem;
+}
+
+.filter-card__icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--zinc-400);
+  pointer-events: none;
+}
+
+.filter-card__button {
+  background: white;
+  color: var(--zinc-600);
+}

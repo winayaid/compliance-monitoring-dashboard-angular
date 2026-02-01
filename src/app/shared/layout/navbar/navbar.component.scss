@@ -1,0 +1,36 @@
+.navbar {
+  border-bottom: 1px solid var(--zinc-200);
+  background: white;
+}
+
+.navbar__content {
+  margin: 0 auto;
+  max-width: 70rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  padding: 0 1.5rem;
+}
+
+.navbar__brand {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--zinc-900);
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--zinc-600);
+}
+
+.navbar__link {
+  transition: color 0.2s ease;
+}
+
+.navbar__link:hover {
+  color: var(--zinc-900);
+}

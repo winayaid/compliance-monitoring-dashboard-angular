@@ -1,0 +1,37 @@
+@use './recent-violations-table.component' as *;
+
+.filter-bar {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(228, 228, 231, 0.7);
+  background: rgba(244, 244, 245, 0.7);
+  padding: 0.75rem;
+}
+
+.filter-bar__search {
+  position: relative;
+  flex: 1;
+  min-width: 14rem;
+}
+
+.filter-bar__icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--zinc-400);
+  pointer-events: none;
+}
+
+.table__row--clickable {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.table__row--clickable:hover {
+  background: var(--zinc-50);
+}

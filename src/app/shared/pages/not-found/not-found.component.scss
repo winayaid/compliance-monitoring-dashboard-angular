@@ -1,0 +1,29 @@
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--zinc-50);
+}
+
+.not-found__card {
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--zinc-200);
+  background: white;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.not-found__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.not-found__subtitle {
+  margin: 0.5rem 0 1.5rem;
+  font-size: 0.875rem;
+  color: var(--zinc-600);
+}

@@ -1,0 +1,6 @@
+<div *ngIf="open" class="modal">
+  <div class="modal__content">
+    <h2 *ngIf="title" class="modal__title">{{ title }}</h2>
+    <ng-content></ng-content>
+  </div>
+</div>

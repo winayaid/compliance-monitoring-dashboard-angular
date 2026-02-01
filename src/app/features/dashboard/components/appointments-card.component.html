@@ -1,0 +1,26 @@
+<section class="appointments">
+  <div class="appointments__header">
+    <p class="card__title">Appointments</p>
+    <button class="appointments__link" type="button">See all</button>
+  </div>
+  <div class="appointments__list">
+    <div class="appointments__item" *ngFor="let appointment of appointments$ | async">
+      <div class="appointments__item-header">
+        <div>
+          <p class="appointments__item-title">{{ appointment.title }}</p>
+          <p class="appointments__item-time">{{ appointment.time }}</p>
+        </div>
+        <div class="appointments__item-duration">
+          <app-icon name="clock" [size]="14"></app-icon>
+          {{ appointment.duration }}
+        </div>
+      </div>
+      <div class="appointments__item-doctor">
+        <span class="appointments__doctor-icon">
+          <app-icon name="user" [size]="16"></app-icon>
+        </span>
+        {{ appointment.doctor }}
+      </div>
+    </div>
+  </div>
+</section>

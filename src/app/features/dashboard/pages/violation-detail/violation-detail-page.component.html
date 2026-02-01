@@ -1,0 +1,37 @@
+<div *ngIf="vm$ | async as vm; else missing" class="violation-detail">
+  <div class="violation-detail__header">
+    <div>
+      <a routerLink="/dashboard/violations" class="violation-detail__back">Back to violations</a>
+      <h1 class="violation-detail__title">Violation details</h1>
+      <p class="violation-detail__subtitle">
+        Review evidence, coordinate response, and track resolution.
+      </p>
+    </div>
+    <div class="violation-detail__actions">
+      <button appButton variant="outline" class="violation-detail__button">Export case</button>
+      <button appButton class="btn--indigo">Assign reviewer</button>
+    </div>
+  </div>
+
+  <div class="violation-detail__grid">
+    <div class="violation-detail__main">
+      <app-violation-summary-card
+        [violation]="vm.violation"
+        [detail]="vm.detail"
+      ></app-violation-summary-card>
+      <app-evidence-gallery [evidence]="vm.detail.evidence"></app-evidence-gallery>
+      <app-violation-timeline [events]="vm.detail.timeline"></app-violation-timeline>
+    </div>
+    <app-update-status-panel
+      [currentStatus]="vm.violation.status"
+      [nextReview]="vm.detail.nextReview"
+    ></app-update-status-panel>
+  </div>
+</div>
+
+<ng-template #missing>
+  <div class="violation-detail__empty">
+    <p class="violation-detail__title">Violation not found</p>
+    <a routerLink="/dashboard/violations" class="btn btn--outline">Back to list</a>
+  </div>
+</ng-template>

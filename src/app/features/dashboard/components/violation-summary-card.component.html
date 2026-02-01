@@ -1,0 +1,39 @@
+<section class="summary-card">
+  <div class="summary-card__header">
+    <div>
+      <p class="summary-card__eyebrow">Violation summary</p>
+      <h2 class="summary-card__title">{{ violation.violation }}</h2>
+      <p class="summary-card__description">{{ detail.description }}</p>
+    </div>
+    <div class="summary-card__badges">
+      <span class="badge" [ngClass]="riskClass(violation.risk)">{{ violation.risk }} risk</span>
+      <span class="badge" [ngClass]="statusClass(violation.status)">{{ violation.status }}</span>
+    </div>
+  </div>
+  <div class="summary-card__details">
+    <div class="summary-card__detail">
+      <p class="summary-card__label">Location</p>
+      <p class="summary-card__value">{{ detail.location }}</p>
+    </div>
+    <div class="summary-card__detail">
+      <p class="summary-card__label">Category</p>
+      <p class="summary-card__value">{{ detail.category }}</p>
+    </div>
+    <div class="summary-card__detail">
+      <p class="summary-card__label">Regulation</p>
+      <p class="summary-card__value">{{ detail.regulation }}</p>
+    </div>
+    <div class="summary-card__detail">
+      <p class="summary-card__label">Assigned to</p>
+      <p class="summary-card__value">{{ detail.assignedTo }}</p>
+    </div>
+    <div class="summary-card__detail">
+      <p class="summary-card__label">Last updated</p>
+      <p class="summary-card__value">{{ detail.lastUpdated }}</p>
+    </div>
+    <div class="summary-card__detail">
+      <p class="summary-card__label">Impact</p>
+      <p class="summary-card__value">{{ detail.impact }}</p>
+    </div>
+  </div>
+</section>

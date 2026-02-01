@@ -1,0 +1,19 @@
+@use './violations-trend-chart.component' as *;
+
+.chart-card__meta {
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+}
+
+.chart-card__meta-strong {
+  font-weight: 600;
+  color: var(--zinc-900);
+}
+
+.chart-card__meta-positive {
+  color: var(--emerald-600);
+}

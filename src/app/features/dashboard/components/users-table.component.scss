@@ -1,0 +1,16 @@
+@use './branch-table.component' as *;
+
+.badge.status-active {
+  background: var(--emerald-100);
+  color: var(--emerald-600);
+}
+
+.badge.status-on-leave {
+  background: var(--amber-100);
+  color: var(--amber-600);
+}
+
+.badge.status-pending {
+  background: var(--zinc-100);
+  color: var(--zinc-700);
+}

@@ -1,0 +1,59 @@
+<section class="table-card">
+  <div class="table-card__header">
+    <div>
+      <p class="card__title">Branch status</p>
+      <p class="card__subtitle">Compliance performance by branch</p>
+    </div>
+    <button appButton variant="outline" size="sm" class="table-card__button">Export</button>
+  </div>
+  <div class="filter-bar">
+    <div class="filter-bar__search">
+      <app-icon name="search" [size]="16" className="filter-bar__icon"></app-icon>
+      <input appInput [hasIcon]="true" placeholder="Search branch or manager" />
+    </div>
+    <button appButton variant="outline" size="sm" class="table-card__button">Risk</button>
+    <button appButton variant="outline" size="sm" class="table-card__button">Region</button>
+    <button appButton variant="outline" size="sm" class="table-card__button">Audit date</button>
+  </div>
+  <div class="table-card__body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Branch</th>
+          <th>Manager</th>
+          <th>Risk score</th>
+          <th>Open violations</th>
+          <th>Compliance rate</th>
+          <th>Last audit</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of branches$ | async">
+          <td>
+            <p class="table__cell--strong">{{ item.branch }}</p>
+            <p class="table__cell--muted table__cell--small">{{ item.region }}</p>
+          </td>
+          <td>{{ item.manager }}</td>
+          <td>
+            <span class="badge" [ngClass]="riskClass(item.riskScore)">{{ item.riskScore }}</span>
+          </td>
+          <td>{{ item.openViolations }}</td>
+          <td>
+            <div class="progress-cell">
+              <div class="progress-cell__header">
+                <span>Rate</span>
+                <span class="progress-cell__value">{{ item.complianceRate }}%</span>
+              </div>
+              <app-progress-bar [value]="item.complianceRate"></app-progress-bar>
+            </div>
+          </td>
+          <td class="table__cell--muted">{{ item.lastAudit }}</td>
+          <td>
+            <span class="badge" [ngClass]="statusClass(item.status)">{{ item.status }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

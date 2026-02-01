@@ -1,0 +1,15 @@
+@use './violations-trend-chart.component' as *;
+
+.bar-series rect {
+  fill: var(--orange-500);
+}
+
+.line-series {
+  fill: none;
+  stroke: var(--blue-600);
+  stroke-width: 2.5;
+}
+
+.line-points circle {
+  fill: var(--blue-600);
+}

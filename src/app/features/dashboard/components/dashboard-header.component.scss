@@ -1,0 +1,45 @@
+.dashboard-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dashboard-header__eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--zinc-500);
+}
+
+.dashboard-header__title {
+  margin: 0.35rem 0 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--zinc-900);
+}
+
+.dashboard-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dashboard-header__button {
+  background: white;
+}
+
+.dashboard-header__icon-button {
+  background: white;
+  color: var(--zinc-600);
+}
+
+@media (min-width: 768px) {
+  .dashboard-header__title {
+    font-size: 1.9rem;
+  }
+}

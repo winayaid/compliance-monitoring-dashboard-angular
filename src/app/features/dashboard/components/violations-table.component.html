@@ -1,0 +1,65 @@
+<section class="table-card">
+  <div class="table-card__header">
+    <div>
+      <p class="card__title">Violations</p>
+      <p class="card__subtitle">Latest compliance incidents across branches</p>
+    </div>
+    <button appButton variant="outline" size="sm" class="table-card__button">Export</button>
+  </div>
+  <div class="filter-bar">
+    <div class="filter-bar__search">
+      <app-icon name="search" [size]="16" className="filter-bar__icon"></app-icon>
+      <input appInput [hasIcon]="true" placeholder="Search violations" />
+    </div>
+    <button appButton variant="outline" size="sm" class="table-card__button">Risk</button>
+    <button appButton variant="outline" size="sm" class="table-card__button">Status</button>
+    <button appButton variant="outline" size="sm" class="table-card__button">Date</button>
+  </div>
+  <div class="table-card__body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Violation</th>
+          <th>Branch</th>
+          <th>Risk</th>
+          <th>Status</th>
+          <th>Date / Time</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of violations$ | async"
+          class="table__row--clickable"
+          (click)="goToDetail(item.id)"
+          tabindex="0"
+          (keydown.enter)="goToDetail(item.id)"
+          (keydown.space)="$event.preventDefault(); goToDetail(item.id)"
+          role="link"
+          [attr.aria-label]="'View details for ' + item.violation"
+        >
+          <td class="table__cell--strong">{{ item.violation }}</td>
+          <td>{{ item.branch }}</td>
+          <td>
+            <span class="badge" [ngClass]="riskClass(item.risk)">{{ item.risk }}</span>
+          </td>
+          <td>
+            <span class="badge" [ngClass]="statusClass(item.status)">{{ item.status }}</span>
+          </td>
+          <td class="table__cell--muted">{{ item.date }} • {{ item.time }}</td>
+          <td>
+            <button
+              appButton
+              variant="ghost"
+              size="icon"
+              aria-label="More actions"
+              (click)="$event.stopPropagation()"
+            >
+              <app-icon name="more-horizontal" [size]="16"></app-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

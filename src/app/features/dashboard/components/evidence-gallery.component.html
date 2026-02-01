@@ -1,0 +1,22 @@
+<section class="evidence">
+  <div class="evidence__header">
+    <div>
+      <p class="card__title">Evidence gallery</p>
+      <p class="card__subtitle">Documents and media supporting the investigation</p>
+    </div>
+    <button class="evidence__action" type="button">Request missing files</button>
+  </div>
+  <div class="evidence__grid">
+    <div class="evidence-card" *ngFor="let item of evidence">
+      <div class="evidence-card__header">
+        <span class="evidence-card__type">
+          <app-icon [name]="typeIcon(item.type)" [size]="16"></app-icon>
+          {{ item.type }}
+        </span>
+        <span class="badge" [ngClass]="statusClass(item.status)">{{ item.status }}</span>
+      </div>
+      <p class="evidence-card__label">{{ item.label }}</p>
+      <p class="evidence-card__date">{{ item.date }}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,191 @@
+import type { ViolationDetail } from '../models/violations';
+
+export const violationDetails: Record<string, ViolationDetail> = {
+  'vio-1': {
+    id: 'vio-1',
+    title: 'Missing safety inspection log',
+    description:
+      'The weekly safety inspection log for the facility was not recorded for the past 14 days. This breaks internal audit requirements and delays audit readiness.',
+    category: 'Safety Operations',
+    regulation: 'ISO 45001 - Section 9.1',
+    assignedTo: 'Alya Rahman',
+    lastUpdated: '01/12/2026 04:10 PM',
+    location: 'Jakarta Central',
+    impact: 'High - audit readiness and worker safety risks.',
+    nextReview: '01/18/2026',
+    evidence: [
+      {
+        id: 'ev-1',
+        label: 'Checklist photo - Bay A',
+        type: 'Photo',
+        status: 'Verified',
+        date: '01/05/2026',
+      },
+      {
+        id: 'ev-2',
+        label: 'Inspection log spreadsheet',
+        type: 'Document',
+        status: 'Missing',
+        date: '01/01/2026',
+      },
+      {
+        id: 'ev-3',
+        label: 'CCTV clip - loading dock',
+        type: 'Video',
+        status: 'Pending',
+        date: '01/03/2026',
+      },
+    ],
+    timeline: [
+      {
+        id: 'tl-1',
+        title: 'Violation flagged',
+        description: 'System detected missing inspection logs for 2 weeks.',
+        date: '01/12/2026 09:42 AM',
+        actor: 'Monitoring Bot',
+      },
+      {
+        id: 'tl-2',
+        title: 'Branch notified',
+        description: 'Compliance lead notified to provide inspection logs.',
+        date: '01/12/2026 10:15 AM',
+        actor: 'Compliance Ops',
+      },
+      {
+        id: 'tl-3',
+        title: 'Evidence requested',
+        description: 'Requested upload of inspection checklist and photos.',
+        date: '01/12/2026 02:30 PM',
+        actor: 'Alya Rahman',
+      },
+    ],
+  },
+  'vio-2': {
+    id: 'vio-2',
+    title: 'Expired compliance certificate',
+    description:
+      'Facility certification expired last month and has not been renewed. Renewal documentation is pending approval.',
+    category: 'Certification',
+    regulation: 'Local Health Regulation 12/2019',
+    assignedTo: 'Nadia Kusuma',
+    lastUpdated: '01/11/2026 03:45 PM',
+    location: 'Bandung',
+    impact: 'Medium - restricts certain operations until renewed.',
+    nextReview: '01/16/2026',
+    evidence: [
+      {
+        id: 'ev-4',
+        label: 'Certificate renewal form',
+        type: 'Document',
+        status: 'Pending',
+        date: '01/09/2026',
+      },
+      {
+        id: 'ev-5',
+        label: 'Previous certificate scan',
+        type: 'Document',
+        status: 'Verified',
+        date: '12/01/2025',
+      },
+    ],
+    timeline: [
+      {
+        id: 'tl-4',
+        title: 'Certificate expired',
+        description: 'Compliance certificate expired without renewal.',
+        date: '01/10/2026 08:00 AM',
+        actor: 'Regulatory Tracker',
+      },
+      {
+        id: 'tl-5',
+        title: 'Renewal in progress',
+        description: 'Branch submitted renewal documentation for review.',
+        date: '01/11/2026 11:20 AM',
+        actor: 'Nadia Kusuma',
+      },
+    ],
+  },
+  'vio-3': {
+    id: 'vio-3',
+    title: 'Unauthorized access attempt',
+    description:
+      'Multiple failed badge entries detected after-hours. Access logs show repeated attempts at restricted storage areas.',
+    category: 'Security',
+    regulation: 'Internal Security Protocol 5.2',
+    assignedTo: 'Rizky Ardiansyah',
+    lastUpdated: '01/10/2026 06:20 PM',
+    location: 'Surabaya',
+    impact: 'High - potential breach of restricted inventory.',
+    nextReview: '01/15/2026',
+    evidence: [
+      {
+        id: 'ev-6',
+        label: 'Access control log',
+        type: 'Log',
+        status: 'Verified',
+        date: '01/10/2026',
+      },
+      {
+        id: 'ev-7',
+        label: 'Security camera stills',
+        type: 'Photo',
+        status: 'Pending',
+        date: '01/10/2026',
+      },
+    ],
+    timeline: [
+      {
+        id: 'tl-6',
+        title: 'Attempt detected',
+        description: 'Access system recorded 7 failed badge swipes.',
+        date: '01/10/2026 08:27 AM',
+        actor: 'Security System',
+      },
+      {
+        id: 'tl-7',
+        title: 'Investigation opened',
+        description: 'Security team reviewing access logs and CCTV.',
+        date: '01/10/2026 02:10 PM',
+        actor: 'Rizky Ardiansyah',
+      },
+    ],
+  },
+  'vio-4': {
+    id: 'vio-4',
+    title: 'Late incident report submission',
+    description:
+      'Incident report submitted 48 hours past required deadline. Review completed, corrective training scheduled.',
+    category: 'Incident Reporting',
+    regulation: 'Compliance Rule 3.1',
+    assignedTo: 'Sinta Mahendra',
+    lastUpdated: '01/09/2026 05:05 PM',
+    location: 'Medan',
+    impact: 'Low - resolved with process adjustment.',
+    nextReview: '02/01/2026',
+    evidence: [
+      {
+        id: 'ev-8',
+        label: 'Incident report PDF',
+        type: 'Document',
+        status: 'Verified',
+        date: '01/09/2026',
+      },
+    ],
+    timeline: [
+      {
+        id: 'tl-8',
+        title: 'Report submitted',
+        description: 'Incident report delivered beyond deadline.',
+        date: '01/09/2026 04:05 PM',
+        actor: 'Branch Supervisor',
+      },
+      {
+        id: 'tl-9',
+        title: 'Corrective action',
+        description: 'Training scheduled for reporting compliance.',
+        date: '01/09/2026 05:00 PM',
+        actor: 'Sinta Mahendra',
+      },
+    ],
+  },
+};

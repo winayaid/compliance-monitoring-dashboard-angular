@@ -1,0 +1,84 @@
+.appointments {
+  border-radius: 1.25rem;
+  border: 1px solid rgba(228, 228, 231, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.appointments__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.appointments__link {
+  border: none;
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--indigo-600);
+  cursor: pointer;
+}
+
+.appointments__list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.appointments__item {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(228, 228, 231, 0.8);
+  background: white;
+  padding: 0.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.appointments__item-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.appointments__item-title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--zinc-900);
+}
+
+.appointments__item-time {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+}
+
+.appointments__item-duration {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+}
+
+.appointments__item-doctor {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+}
+
+.appointments__doctor-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: var(--indigo-50);
+  color: var(--indigo-600);
+}

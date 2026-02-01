@@ -1,0 +1,41 @@
+<section class="table-card">
+  <div class="table-card__header">
+    <p class="card__title">Recent violations</p>
+    <div class="table-card__actions">
+      <button appButton variant="outline" size="sm" class="table-card__button">Month</button>
+      <button appButton variant="outline" size="sm" class="table-card__button">Sort</button>
+    </div>
+  </div>
+  <div class="table-card__body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Violation</th>
+          <th>Branch</th>
+          <th>Risk</th>
+          <th>Status</th>
+          <th>Date / Time</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of violations$ | async">
+          <td class="table__cell--strong">{{ item.violation }}</td>
+          <td>{{ item.branch }}</td>
+          <td>
+            <span class="badge" [ngClass]="riskClass(item.risk)">{{ item.risk }}</span>
+          </td>
+          <td>
+            <span class="badge" [ngClass]="statusClass(item.status)">{{ item.status }}</span>
+          </td>
+          <td class="table__cell--muted">{{ item.date }} • {{ item.time }}</td>
+          <td>
+            <button appButton variant="ghost" size="icon" aria-label="More actions">
+              <app-icon name="more-horizontal" [size]="16"></app-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

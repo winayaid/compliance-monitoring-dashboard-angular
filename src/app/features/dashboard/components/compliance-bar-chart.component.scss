@@ -1,0 +1,44 @@
+@use './branch-risk-chart.component' as *;
+
+.bar-series rect {
+  fill: var(--cyan-500);
+}
+
+.line-series {
+  stroke: var(--orange-500);
+}
+
+.line-points circle {
+  fill: var(--orange-500);
+}
+
+.compliance-summary {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.compliance-summary__card {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(228, 228, 231, 0.7);
+  background: rgba(244, 244, 245, 0.6);
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--zinc-500);
+}
+
+.compliance-summary__title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--zinc-900);
+}
+
+.compliance-summary__text {
+  margin: 0.3rem 0 0;
+}
+
+@media (min-width: 640px) {
+  .compliance-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

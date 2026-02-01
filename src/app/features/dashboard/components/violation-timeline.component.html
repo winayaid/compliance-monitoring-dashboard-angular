@@ -1,0 +1,22 @@
+<section class="timeline">
+  <div>
+    <p class="card__title">Violation timeline</p>
+    <p class="card__subtitle">Track actions taken and milestones reached</p>
+  </div>
+  <div class="timeline__list">
+    <div class="timeline__item" *ngFor="let event of events; let last = last">
+      <div class="timeline__marker">
+        <span class="timeline__dot"></span>
+        <span class="timeline__line" *ngIf="!last"></span>
+      </div>
+      <div class="timeline__card">
+        <div class="timeline__card-header">
+          <p class="timeline__title">{{ event.title }}</p>
+          <span class="timeline__date">{{ event.date }}</span>
+        </div>
+        <p class="timeline__description">{{ event.description }}</p>
+        <p class="timeline__meta">Updated by {{ event.actor }}</p>
+      </div>
+    </div>
+  </div>
+</section>

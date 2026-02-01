@@ -1,0 +1,14 @@
+<header class="navbar">
+  <div class="navbar__content">
+    <a routerLink="/" class="navbar__brand">{{ appName }}</a>
+    <nav class="navbar__nav">
+      <a
+        *ngFor="let item of navigation.primary"
+        [routerLink]="item.href"
+        class="navbar__link"
+      >
+        {{ item.label }}
+      </a>
+    </nav>
+  </div>
+</header>
