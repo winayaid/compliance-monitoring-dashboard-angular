@@ -2,6 +2,17 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
 
+## Built With
+
+- **Angular** as the main framework
+- **TypeScript** for type safety
+- **SCSS** for styling
+
+## Key Libraries
+
+- **ng2-charts** + **Chart.js** for charts and data visualization
+- **RxJS** for reactive data flows
+
 ## Development server
 
 To start a local development server, run:
@@ -57,3 +68,11 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Contributing
+
+Contributions are welcome. If you'd like to contribute, please open an issue or pull request with a clear description of the change.
+
+If you want to use this project for commercial purposes, please contact me first.
+
+If this project helps you, please give the repo a star to support the developer community.
